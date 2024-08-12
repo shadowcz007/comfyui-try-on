@@ -13,20 +13,9 @@ from .func import *
 # 指定本地分割模型文件夹的路径
 segformer_model_path=get_comfyui_config_model_path("segformer")
 
-model_folder_path = os.path.join(segformer_model_path,"segformer-b2-clothes")
+model_folder_path = os.path.join(segformer_model_path,"segformer_b2_clothes")
 
 
- 
-# 切割服装
-def get_segmentation(tensor_image):
-    cloth = tensor2pil(tensor_image)
-    # 预处理和预测
-    inputs = processor(images=cloth, return_tensors="pt")
-    outputs = model(**inputs)
-    logits = outputs.logits.cpu()
-    upsampled_logits = nn.functional.interpolate(logits, size=cloth.size[::-1], mode="bilinear", align_corners=False)
-    pred_seg = upsampled_logits.argmax(dim=1)[0].numpy()
-    return pred_seg,cloth
 
 
 class segformer_b2_clothes:
@@ -66,6 +55,17 @@ class segformer_b2_clothes:
     def sample(self,image,Face,Hat,Hair,Upper_clothes,Skirt,Pants,Dress,Belt,shoe,leg,arm,Bag,Scarf):
         processor = SegformerImageProcessor.from_pretrained(model_folder_path)
         model = AutoModelForSemanticSegmentation.from_pretrained(model_folder_path)
+
+        # 切割服装
+        def get_segmentation(tensor_image):
+            cloth = tensor2pil(tensor_image)
+            # 预处理和预测
+            inputs = processor(images=cloth, return_tensors="pt")
+            outputs = model(**inputs)
+            logits = outputs.logits.cpu()
+            upsampled_logits = nn.functional.interpolate(logits, size=cloth.size[::-1], mode="bilinear", align_corners=False)
+            pred_seg = upsampled_logits.argmax(dim=1)[0].numpy()
+            return pred_seg,cloth
 
         results = []
         for item in image:

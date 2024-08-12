@@ -16,6 +16,7 @@ Virtual try-on for creating a personal brand wardrobe collection.
 ComfyUI\models\segformer\segformer-b3-fashion
 https://huggingface.co/sayeed99/segformer-b3-fashion
 
+segformer_b2_clothes
 
 参考：
 The original GitHub project is https://github.com/Zheng-Chong/CatVTON
