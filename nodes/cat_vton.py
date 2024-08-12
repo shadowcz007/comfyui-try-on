@@ -1,7 +1,6 @@
 from .func import *
 from comfy.utils import ProgressBar
 
-NODE_NAME = 'CatVTON_Wrapper'
 
 class LS_CatVTON:
 
@@ -28,7 +27,7 @@ class LS_CatVTON:
     RETURN_TYPES = ("IMAGE",)
     RETURN_NAMES = ("image",)
     FUNCTION = "catvton"
-    CATEGORY = '♾️Mixlab/CatVTON'
+    CATEGORY = '♾️Mixlab/TryOn'
 
     def catvton(self, image, mask, refer_image, mask_grow, mixed_precision, seed, steps, cfg,attn_ckpt_version,device):
 
@@ -94,8 +93,7 @@ class LS_CatVTON:
 
         result_image = restore_padding_image(result_image, target_image.size, person_image_bbox)
         result_image = to_tensor(result_image).permute(1, 2, 0).unsqueeze(0)
-        log(f"{NODE_NAME} Processed.", message_type='finish')
-
+        
         return (result_image,)
 
 NODE_CLASS_MAPPINGS = {

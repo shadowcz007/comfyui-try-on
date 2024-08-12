@@ -21,18 +21,6 @@ from torchvision.transforms.functional import to_pil_image, to_tensor
 from diffusers.image_processor import VaeImageProcessor
 import folder_paths
 
-def log(message:str, message_type:str='info'):
-    name = 'LayerStyle'
-
-    if message_type == 'error':
-        message = '\033[1;41m' + message + '\033[m'
-    elif message_type == 'warning':
-        message = '\033[1;31m' + message + '\033[m'
-    elif message_type == 'finish':
-        message = '\033[1;32m' + message + '\033[m'
-    else:
-        message = '\033[1;33m' + message + '\033[m'
-    print(f"# 😺dzNodes: {name} -> {message}")
 
 def pil2tensor(image:Image) -> torch.Tensor:
     return torch.from_numpy(np.array(image).astype(np.float32) / 255.0).unsqueeze(0)

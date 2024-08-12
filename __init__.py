@@ -9,7 +9,7 @@ import shutil
 NODE_CLASS_MAPPINGS = {}
 NODE_DISPLAY_NAME_MAPPINGS = {}
 
-python = sys.executable
+# python = sys.executable
 
 def get_ext_dir(subpath=None, mkdir=False):
     dir = os.path.dirname(__file__)
@@ -22,13 +22,14 @@ def get_ext_dir(subpath=None, mkdir=False):
         os.makedirs(dir)
     return dir
 
-py = get_ext_dir("py")
-files = os.listdir(py)
+nodes = get_ext_dir("nodes")
+files = os.listdir(nodes)
 for file in files:
     if not file.endswith(".py"):
         continue
     name = os.path.splitext(file)[0]
-    imported_module = importlib.import_module(".py.{}".format(name), __name__)
+
+    imported_module = importlib.import_module(".nodes.{}".format(name), __name__)
     try:
         NODE_CLASS_MAPPINGS = {**NODE_CLASS_MAPPINGS, **imported_module.NODE_CLASS_MAPPINGS}
         NODE_DISPLAY_NAME_MAPPINGS = {**NODE_DISPLAY_NAME_MAPPINGS, **imported_module.NODE_DISPLAY_NAME_MAPPINGS}
