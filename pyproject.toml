@@ -1,0 +1,14 @@
+[project]
+name = "comfyui-try-on"
+description = "Virtual try-on for creating a personal brand wardrobe collection."
+version = "1.0.0"
+license = {file = "LICENSE"}
+
+[project.urls]
+Repository = "https://github.com/shadowcz007/comfyui-try-on"
+#  Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = ""
+DisplayName = "comfyui-try-on"
+Icon = ""
